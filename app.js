@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
-import errorHandler from "./middleware/error.middleware.js";
+import authRoutes from "./routes/authRoutes.js"; // ✅ add this import
+import otpRoutes from "./routes/otpRoutes.js";
 
-// Initialize Express app
 const app = express();
 
 // Middleware configuration
@@ -14,33 +14,33 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 };
+
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 
-// Health check route (✅ IMPORTANT for Render)
+// ✅ Mount routes here
+app.use("/api/auth", authRoutes);
+app.use("/api/otp", otpRoutes);
+
+// Health check route
 app.get("/trading", (req, res) => {
   res.status(200).json({
     status: "OK",
     message: "Trading endpoint is active",
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
-
-
 
 // Home route
 app.get("/", (req, res) => {
-  res.json({ 
+  res.json({
     message: "Welcome To Trading API",
     version: "1.0.0",
     status: "active",
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
-
-// ✅ Error handler should be last
-app.use(errorHandler);
 
 export default app;
