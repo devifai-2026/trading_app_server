@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import authRoutes from "./routes/authRoutes.js"; // ✅ add this import
-import otpRoutes from "./routes/otpRoutes.js";
+import authRoutes from "./routes/user/authRoutes.js"; // ✅ add this import
+import otpRoutes from "./routes/user/otpRoutes.js";
 
 const app = express();
 

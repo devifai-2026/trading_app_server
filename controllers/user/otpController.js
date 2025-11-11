@@ -1,6 +1,6 @@
-import User from "../models/UserModel/UserModel.js";
-import { generateAccessToken, generateRefreshToken } from "../utils/jwt.js";
-import ApiResponse from "../utils/ApiResponse.js";
+import User from "../../models/UserModel/UserModel.js";
+import { generateAccessToken, generateRefreshToken } from "../../utils/jwt.js";
+import ApiResponse from "../../utils/ApiResponse.js";
 
 const FIXED_OTP = "123456"; // For testing only
 
